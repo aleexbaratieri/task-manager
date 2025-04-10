@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS `task_manager`;
+
+GRANT ALL PRIVILEGES ON *.* TO 'laravel'@'%';
