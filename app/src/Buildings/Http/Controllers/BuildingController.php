@@ -3,6 +3,7 @@
 namespace Src\Buildings\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Src\Buildings\Http\Resources\BuildingResource;
 use Src\Buildings\Services\BuildingServiceInterface;
 
 class BuildingController extends Controller
@@ -12,21 +13,21 @@ class BuildingController extends Controller
     /**
      * List all existing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Src\Buildings\Http\Resources\BuildingResource
      */
     public function index()
     {
-        return $this->service->getAll();
+        return BuildingResource::collection($this->service->getAll());
     }
 
     /**
      * Show the specified resource.
      *
-     * @param  string                    $id The ID of the building.
-     * @return \Illuminate\Http\Response
+     * @param  string                                         $id The ID of the building.
+     * @return \Src\Buildings\Http\Resources\BuildingResource
      */
     public function show(string $id)
     {
-        return $this->service->getById($id);
+        return BuildingResource::make($this->service->getById($id));
     }
 }
