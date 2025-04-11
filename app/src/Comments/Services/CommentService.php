@@ -2,17 +2,27 @@
 
 namespace Src\Comments\Services;
 
+use Src\Comments\Filters\LoadRelations;
 use Src\Comments\Repositories\CommentRepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class CommentService implements CommentServiceInterface
 {
     /**
+     * The relations that should be loaded
+     */
+    protected array $relations = [];
+
+    /**
      * The Comment Service instance.
+     * 
      *
      * @param CommentRepositoryInterface $repo The CommentRepositoryInterface instance.
      */
-    public function __construct(private readonly CommentRepositoryInterface $repo) {}
+    public function __construct(private readonly CommentRepositoryInterface $repo) 
+    {
+        $this->relations = LoadRelations::handle();
+    }
 
     /**
      * Retrieve all comments associated with a given task and building.
@@ -39,7 +49,7 @@ class CommentService implements CommentServiceInterface
      */
     public function getCommentFromTask(string $buildingId, string $taskId, string $commentId)
     {
-        return $this->repo->getCommentFromTask($buildingId, $taskId, $commentId);
+        return $this->repo->getCommentFromTask($buildingId, $taskId, $commentId, $this->relations);
     }
 
     /**

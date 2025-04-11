@@ -24,7 +24,7 @@ interface CommentRepositoryInterface
      *
      * @return \Src\Comments\Models\Comment The comment.
      */
-    public function getCommentFromTask(string $buildingId, string $taskId, string $commentId);
+    public function getCommentFromTask(string $buildingId, string $taskId, string $commentId, array $relations = []);
 
     /**
      * Create a new comment associated with a given task and building.

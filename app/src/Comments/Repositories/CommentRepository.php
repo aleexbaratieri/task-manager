@@ -36,9 +36,14 @@ class CommentRepository implements CommentRepositoryInterface
      *
      * @return \Src\Comments\Models\Comment The comment.
      */
-    public function getCommentFromTask(string $buildingId, string $taskId, string $commentId)
+    public function getCommentFromTask(string $buildingId, string $taskId, string $commentId, array $relations = [])
     {
-        return $this->resource->where('building_id', $buildingId)->where('task_id', $taskId)->where('id', $commentId)->firstOrFail();
+        return $this->resource
+            ->where('building_id', $buildingId)
+            ->where('task_id', $taskId)
+            ->where('id', $commentId)
+            ->with($relations)
+            ->firstOrFail();
     }
 
     /**
