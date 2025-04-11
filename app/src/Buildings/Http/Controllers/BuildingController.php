@@ -22,6 +22,8 @@ class BuildingController extends Controller
     /**
      * Show the specified resource.
      *
+     * @param  string  $id The ID of the building.
+     * 
      * @return \Illuminate\Http\Response
      */
     public function show(string $id)
