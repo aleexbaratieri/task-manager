@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Src\Buildings\Models\Building;
 
 class Task extends Model
 {
@@ -21,4 +22,14 @@ class Task extends Model
         'owner_id',
         'status',
     ];
+
+    /**
+     * Get the building that this task belongs to
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function building()
+    {
+        return $this->belongsTo(Building::class);
+    }
 }

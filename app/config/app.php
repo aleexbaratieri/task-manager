@@ -166,6 +166,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Src\Buildings\Providers\ServiceRepositoryProvider::class,
+        Src\Tasks\Providers\ServiceRepositoryProvider::class,
     ])->toArray(),
 
     /*

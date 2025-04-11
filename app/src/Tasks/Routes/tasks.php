@@ -14,7 +14,7 @@ use Src\Tasks\Http\Controllers\TaskController;
 |
 */
 
-Route::prefix('{building}/tasks')->group(function () {
+Route::prefix('buildings/{building}/tasks')->group(function () {
     Route::get('/', [TaskController::class, 'index']);
     Route::get('/{task}', [TaskController::class, 'show']);
     Route::post('/', [TaskController::class, 'store']);
