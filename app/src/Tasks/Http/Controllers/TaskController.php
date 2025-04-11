@@ -20,7 +20,7 @@ class TaskController extends Controller
     /**
      * List all existing of the resource.
      *
-     * @param  string                    $buildingId The ID of the building.
+     * @param  string                                        $buildingId The ID of the building.
      * @return array<\Src\Tasks\Http\Resources\TaskResource>
      */
     public function index(string $buildingId)
@@ -31,8 +31,8 @@ class TaskController extends Controller
     /**
      * Show the specified resource.
      *
-     * @param  string                    $buildingId The ID of the building.
-     * @param  string                    $taskId     The ID of the task.
+     * @param  string                                 $buildingId The ID of the building.
+     * @param  string                                 $taskId     The ID of the task.
      * @return \Src\Tasks\Http\Resources\TaskResource
      */
     public function show(string $buildingId, string $id)
@@ -68,8 +68,8 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string                    $buildingId The ID of the building.
-     * @param  string                    $taskId     The ID of the task.
+     * @param  string                                 $buildingId The ID of the building.
+     * @param  string                                 $taskId     The ID of the task.
      * @return \Src\Tasks\Http\Resources\TaskResource
      */
     public function destroy(string $buildingId, string $id)

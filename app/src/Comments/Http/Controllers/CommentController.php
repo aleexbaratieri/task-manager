@@ -19,8 +19,8 @@ class CommentController extends Controller
     /**
      * Retrieve all comments associated with a given task and building.
      *
-     * @param  string                                                                 $buildingId The ID of the building.
-     * @param  string                                                                 $taskId     The ID of the task.
+     * @param  string                                              $buildingId The ID of the building.
+     * @param  string                                              $taskId     The ID of the task.
      * @return array<\Src\Comments\Http\Resources\CommentResource>
      */
     public function index(string $buildingId, string $taskId)
@@ -47,10 +47,9 @@ class CommentController extends Controller
     /**
      * Create a new comment associated with a given task and building.
      *
-     * @param  string                       $buildingId The ID of the building.
-     * @param  string                       $taskId     The ID of the task.
-     * @param  Request                      $request    The request object containing the data for creating the comment.
-     * 
+     * @param  string                                       $buildingId The ID of the building.
+     * @param  string                                       $taskId     The ID of the task.
+     * @param  Request                                      $request    The request object containing the data for creating the comment.
      * @return \Src\Comments\Http\Resources\CommentResource
      */
     public function store(string $buildingId, string $taskId, Request $request)

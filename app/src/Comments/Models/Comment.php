@@ -30,4 +30,15 @@ class Comment extends Model
     {
         return $this->belongsTo(Task::class);
     }
+
+    /**
+     * Get the user that authored this comment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+
+    public function author()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
 }

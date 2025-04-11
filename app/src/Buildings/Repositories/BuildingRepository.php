@@ -27,8 +27,8 @@ class BuildingRepository implements BuildingRepositoryInterface
      *
      * @return \Src\Buildings\Models\Building The building with the specified ID.
      */
-    public function getById($id)
+    public function getById($id, array $relations = [])
     {
-        return $this->resource->where('id', $id)->firstOrFail();
+        return $this->resource->with($relations)->where('id', $id)->firstOrFail();
     }
 }

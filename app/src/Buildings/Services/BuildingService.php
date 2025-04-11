@@ -3,10 +3,16 @@
 namespace Src\Buildings\Services;
 
 use Src\Buildings\Repositories\BuildingRepositoryInterface;
+use Src\Buildings\Filters\LoadRelations;
 
 class BuildingService implements BuildingServiceInterface
 {
-    public function __construct(private readonly BuildingRepositoryInterface $repo) {}
+    protected array $relations = [];
+
+    public function __construct(private readonly BuildingRepositoryInterface $repo)
+    {
+        $this->relations = LoadRelations::handle();
+    }
 
     /**
      * Retrieve all existing buildings.
@@ -29,6 +35,6 @@ class BuildingService implements BuildingServiceInterface
      */
     public function getById(string $id)
     {
-        return $this->repo->getById($id);
+        return $this->repo->getById($id, $this->relations);
     }
 }

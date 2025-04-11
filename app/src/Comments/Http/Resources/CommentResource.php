@@ -18,7 +18,7 @@ class CommentResource extends JsonResource
         return [
             'id' => $this->id,
             'comment' => $this->comment,
-            'author' => $this->author_id,
+            'author' => $this->whenLoaded('author'),
             'task' => TaskResource::make($this->whenLoaded('task')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

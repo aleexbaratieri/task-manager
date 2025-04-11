@@ -20,5 +20,5 @@ interface BuildingRepositoryInterface
      *
      * @return \Src\Buildings\Models\Building The building with the specified ID.
      */
-    public function getById($id);
+    public function getById($id, array $relations = []);
 }
