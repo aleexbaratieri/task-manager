@@ -46,7 +46,7 @@ class TaskRepository implements TaskRepositoryInterface
      * @param  array                  $data       The data for creating the task.
      * @return \Src\Tasks\Models\Task The newly created task.
      */
-    public function createTaskOnBuilding(string $buildingId, array $data)
+    public function createTaskOnBuilding(array $data)
     {
         return $this->resource->create($data);
     }

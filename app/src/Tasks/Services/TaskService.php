@@ -2,7 +2,6 @@
 
 namespace Src\Tasks\Services;
 
-use Src\Tasks\Constants\TaskStatus;
 use Src\Tasks\Repositories\TaskRepositoryInterface;
 
 class TaskService implements TaskServiceInterface
@@ -53,15 +52,7 @@ class TaskService implements TaskServiceInterface
      */
     public function createTaskOnBuilding(string $buildingId, array $data)
     {
-        $authorId = auth()->user()->id;
-
-        $data = array_merge($data, [
-            'author_id' => $authorId,
-            'building_id' => $buildingId,
-            'status' => TaskStatus::OPEN,
-        ]);
-
-        return $this->repo->createTaskOnBuilding($buildingId, $data);
+        return $this->repo->createTaskOnBuilding(array_merge($data, ['building_id' => $buildingId]));
     }
 
     /**
