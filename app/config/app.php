@@ -167,6 +167,9 @@ return [
 
         Src\Buildings\Providers\ServiceRepositoryProvider::class,
         Src\Tasks\Providers\ServiceRepositoryProvider::class,
+        Src\Tasks\Providers\EventServiceProvider::class,
+        Src\Comments\Providers\ServiceRepositoryProvider::class,
+        Src\Comments\Providers\EventServiceProvider::class,
     ])->toArray(),
 
     /*

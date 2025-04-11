@@ -33,7 +33,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'))
                 ->group(base_path('src/Tasks/Routes/tasks.php'))
-                ->group(base_path('src/Buildings/Routes/buildings.php'));
+                ->group(base_path('src/Buildings/Routes/buildings.php'))
+                ->group(base_path('src/Comments/Routes/comments.php'));
         });
     }
 }
