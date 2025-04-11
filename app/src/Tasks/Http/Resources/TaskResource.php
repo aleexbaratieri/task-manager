@@ -1,12 +1,13 @@
 <?php
 
-namespace Src\Buildings\Http\Resources;
+namespace Src\Tasks\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Src\Tasks\Http\Resources\TaskResource;
+use Src\Buildings\Http\Resources\BuildingResource;
+use Src\Comments\Http\Resources\CommentResource;
 
-class BuildingResource extends JsonResource
+class TaskResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,10 +20,13 @@ class BuildingResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'address' => $this->address,
+            'owner' => $this->owner_id,
+            'author' => $this->author_id,
+            'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
+            'building' => BuildingResource::make($this->whenLoaded('building')),
+            'comments' => CommentResource::collection($this->whenLoaded('comments')),
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace Src\Tasks\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Src\Tasks\Http\Requests\StoreTaskRequest;
 use Src\Tasks\Http\Requests\UpdateTaskRequest;
+use Src\Tasks\Http\Resources\TaskResource;
 use Src\Tasks\Services\TaskServiceInterface;
 
 class TaskController extends Controller
@@ -20,11 +21,11 @@ class TaskController extends Controller
      * List all existing of the resource.
      *
      * @param  string                    $buildingId The ID of the building.
-     * @return \Illuminate\Http\Response
+     * @return array<\Src\Tasks\Http\Resources\TaskResource>
      */
     public function index(string $buildingId)
     {
-        return $this->service->getTasksFromBuilding($buildingId);
+        return TaskResource::collection($this->service->getTasksFromBuilding($buildingId));
     }
 
     /**
@@ -32,11 +33,11 @@ class TaskController extends Controller
      *
      * @param  string                    $buildingId The ID of the building.
      * @param  string                    $taskId     The ID of the task.
-     * @return \Illuminate\Http\Response
+     * @return \Src\Tasks\Http\Resources\TaskResource
      */
     public function show(string $buildingId, string $id)
     {
-        return $this->service->getTaskFromBuilding($buildingId, $id);
+        return TaskResource::make($this->service->getTaskFromBuilding($buildingId, $id));
     }
 
     /**
@@ -44,11 +45,11 @@ class TaskController extends Controller
      *
      * @param  string                                    $buildingId The ID of the building.
      * @param  \Src\Tasks\Http\Requests\StoreTaskRequest $request    The request object.
-     * @return \Illuminate\Http\Response
+     * @return \Src\Tasks\Http\Resources\TaskResource
      */
     public function store(string $buildingId, StoreTaskRequest $request)
     {
-        return $this->service->createTaskOnBuilding($buildingId, $request->all());
+        return TaskResource::make($this->service->createTaskOnBuilding($buildingId, $request->validated()));
     }
 
     /**
@@ -57,11 +58,11 @@ class TaskController extends Controller
      * @param  string                                     $buildingId The ID of the building.
      * @param  \Src\Tasks\Http\Requests\UpdateTaskRequest $request    The request object.
      * @param  string                                     $id         The ID of the task.
-     * @return \Illuminate\Http\Response
+     * @return \Src\Tasks\Http\Resources\TaskResource
      */
     public function update(string $buildingId, UpdateTaskRequest $request, string $id)
     {
-        return $this->service->updateTaskOnBuilding($buildingId, $id, $request->all());
+        return TaskResource::make($this->service->updateTaskOnBuilding($buildingId, $id, $request->validated()));
     }
 
     /**
@@ -69,7 +70,7 @@ class TaskController extends Controller
      *
      * @param  string                    $buildingId The ID of the building.
      * @param  string                    $taskId     The ID of the task.
-     * @return \Illuminate\Http\Response
+     * @return \Src\Tasks\Http\Resources\TaskResource
      */
     public function destroy(string $buildingId, string $id)
     {

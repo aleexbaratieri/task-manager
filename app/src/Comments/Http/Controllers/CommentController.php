@@ -4,6 +4,7 @@ namespace Src\Comments\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Src\Comments\Http\Resources\CommentResource;
 use Src\Comments\Services\CommentServiceInterface;
 
 class CommentController extends Controller
@@ -20,11 +21,11 @@ class CommentController extends Controller
      *
      * @param  string                                                                 $buildingId The ID of the building.
      * @param  string                                                                 $taskId     The ID of the task.
-     * @return \Illuminate\Database\Eloquent\Collection<\Src\Comments\Models\Comment>
+     * @return array<\Src\Comments\Http\Resources\CommentResource>
      */
     public function index(string $buildingId, string $taskId)
     {
-        return $this->service->getCommentsFromTask($buildingId, $taskId);
+        return CommentResource::collection($this->service->getCommentsFromTask($buildingId, $taskId));
     }
 
     /**
@@ -36,11 +37,11 @@ class CommentController extends Controller
      *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException If the comment is not found.
      *
-     * @return \Src\Comments\Models\Comment The comment.
+     * @return \Src\Comments\Http\Resources\CommentResource
      */
     public function show(string $buildingId, string $taskId, string $commentId)
     {
-        return $this->service->getCommentFromTask($buildingId, $taskId, $commentId);
+        return CommentResource::make($this->service->getCommentFromTask($buildingId, $taskId, $commentId));
     }
 
     /**
@@ -49,11 +50,12 @@ class CommentController extends Controller
      * @param  string                       $buildingId The ID of the building.
      * @param  string                       $taskId     The ID of the task.
      * @param  Request                      $request    The request object containing the data for creating the comment.
-     * @return \Src\Comments\Models\Comment The newly created comment.
+     * 
+     * @return \Src\Comments\Http\Resources\CommentResource
      */
     public function store(string $buildingId, string $taskId, Request $request)
     {
-        return $this->service->creteCommentOnTask($buildingId, $taskId, $request->all());
+        return CommentResource::make($this->service->creteCommentOnTask($buildingId, $taskId, $request->validated()));
     }
 
     /**
