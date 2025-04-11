@@ -34,9 +34,9 @@ class TaskRepository implements TaskRepositoryInterface
      *
      * @return \Src\Tasks\Models\Task
      */
-    public function getTaskByBuilding(string $buildingId, string $id)
+    public function getTaskByBuilding(string $buildingId, string $id, array $relations = [])
     {
-        return $this->resource->where('building_id', $buildingId)->where('id', $id)->firstOrFail();
+        return $this->resource->with($relations)->where('building_id', $buildingId)->where('id', $id)->firstOrFail();
     }
 
     /**

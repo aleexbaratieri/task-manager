@@ -2,16 +2,21 @@
 
 namespace Src\Tasks\Services;
 
+use Src\Tasks\Filters\LoadRelations;
 use Src\Tasks\Repositories\TaskRepositoryInterface;
 
 class TaskService implements TaskServiceInterface
 {
+    protected array $relations = [];
     /**
      * The task repository instance.
      *
      * @var \Src\Tasks\Repositories\TaskRepositoryInterface
      */
-    public function __construct(private readonly TaskRepositoryInterface $repo) {}
+    public function __construct(private readonly TaskRepositoryInterface $repo) 
+    {
+        $this->relations = LoadRelations::handle();
+    }
 
     /**
      * Retrieve all tasks associated with a given building.
@@ -36,7 +41,7 @@ class TaskService implements TaskServiceInterface
      */
     public function getTaskFromBuilding(string $buildingId, string $taskId)
     {
-        return $this->repo->getTaskByBuilding($buildingId, $taskId);
+        return $this->repo->getTaskByBuilding($buildingId, $taskId, $this->relations);
     }
 
     /**

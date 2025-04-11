@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Buildings\Filters;
+namespace Src\Tasks\Filters;
 
 use Src\Shared\Interfaces\LoadRelationsInterface;
 
@@ -15,26 +15,25 @@ class LoadRelations implements LoadRelationsInterface
     {
         $relations = [];
 
-        if (self::testRelation('tasks')) {
+        if (self::testRelation('building')) {
+            $relations[] = 'building';
+        }
+
+        if (self::testRelation('authors')) {
+            $relations[] = 'author';
+        }
+
+        if (self::testRelation('owners')) {
+            $relations[] = 'owner';
+        }
+
+        if (self::testRelation('comments')) {
+            
+            $relations[] = 'comments';
 
             if (self::testRelation('authors')) {
-                $relations[] = 'tasks.author';
+                $relations[] = 'comments.author';
             }
-
-            if (self::testRelation('owners')) {
-                $relations[] = 'tasks.owner';
-            }
-
-            if (self::testRelation('comments')) {
-                
-                $relations[] = 'tasks.comments';
-
-                if (self::testRelation('authors')) {
-                    $relations[] = 'tasks.comments.author';
-                }
-            }
-
-            $relations[] = 'tasks';
         }
 
         return $relations;

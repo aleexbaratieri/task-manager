@@ -22,7 +22,7 @@ interface TaskRepositoryInterface
      *
      * @return \Src\Tasks\Models\Task
      */
-    public function getTaskByBuilding(string $buildingId, string $id);
+    public function getTaskByBuilding(string $buildingId, string $id, array $relations = []);
 
     /**
      * Create a new task associated with a given building.
