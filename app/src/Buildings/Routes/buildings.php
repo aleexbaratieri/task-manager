@@ -13,6 +13,7 @@ use Src\Buildings\Http\Controllers\BuildingController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::get('/', [BuildingController::class, 'index']);
-Route::get('/{building}', [BuildingController::class, 'show']);
+Route::prefix('buildings')->group(function () {
+    Route::get('/', [BuildingController::class, 'index']);
+    Route::get('/{building}', [BuildingController::class, 'show']);
+});

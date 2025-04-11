@@ -14,8 +14,10 @@ use Src\Tasks\Http\Controllers\TaskController;
 |
 */
 
-Route::get('/', [TaskController::class, 'index']);
-Route::get('/{task}', [TaskController::class, 'show']);
-Route::post('/', [TaskController::class, 'store']);
-Route::put('/{task}', [TaskController::class, 'update']);
-Route::delete('/{task}', [TaskController::class, 'destroy']);
+Route::prefix('{building}/tasks')->group(function () {
+    Route::get('/', [TaskController::class, 'index']);
+    Route::get('/{task}', [TaskController::class, 'show']);
+    Route::post('/', [TaskController::class, 'store']);
+    Route::put('/{task}', [TaskController::class, 'update']);
+    Route::delete('/{task}', [TaskController::class, 'destroy']);
+});
