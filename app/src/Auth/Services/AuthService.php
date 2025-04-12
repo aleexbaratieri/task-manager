@@ -11,6 +11,11 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthService implements AuthServiceInterface
 {
+    /**
+     * Attempt to authenticate a user and return a JWT token.
+     *
+     * @throws UnauthorizedException
+     */
     public function login(array $credentials): array
     {
         try {
@@ -31,11 +36,21 @@ class AuthService implements AuthServiceInterface
         }
     }
 
+    /**
+     * Invalidate the current JWT token, effectively logging the user out.
+     *
+     * @throws \Tymon\JWTAuth\Exceptions\JWTException
+     */
     public function logout(): void
     {
         JWTAuth::invalidate(JWTAuth::getToken());
     }
 
+    /**
+     * Refresh a token.
+     *
+     * @return array The new token's details with the user.
+     */
     public function refresh(): array
     {
         $token = JWTAuth::refresh(JWTAuth::getToken());
@@ -48,6 +63,9 @@ class AuthService implements AuthServiceInterface
         ];
     }
 
+    /**
+     * Get the authenticated user.
+     */
     public function me(): ?Authenticatable
     {
         return Auth::user();

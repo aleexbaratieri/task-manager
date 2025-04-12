@@ -34,7 +34,7 @@ trait StatusChangeVerification
     protected function checkIfTaskStatusCanBeChanged(string $currentStatus, TaskStatus $needToBe): void
     {
         if ($currentStatus !== $needToBe->value) {
-            throw new HttpException( Response::HTTP_FORBIDDEN, 'This task status cannot be changed.');
+            throw new HttpException(Response::HTTP_FORBIDDEN, 'This task status cannot be changed.');
         }
     }
 }

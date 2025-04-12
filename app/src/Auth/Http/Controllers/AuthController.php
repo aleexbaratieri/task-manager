@@ -13,11 +13,21 @@ class AuthController extends Controller
 {
     public function __construct(private readonly AuthServiceInterface $service) {}
 
+    /**
+     * Authenticate a user and return a token.
+     *
+     * @return TokenResource
+     */
     public function login(LoginRequest $request)
     {
         return TokenResource::make($this->service->login($request->validated()));
     }
 
+    /**
+     * Log the user out of the application.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function logout()
     {
         $this->service->logout();
@@ -25,11 +35,21 @@ class AuthController extends Controller
         return response()->json([], Response::HTTP_ACCEPTED);
     }
 
+    /**
+     * Refresh the current authentication token and return a new token resource.
+     *
+     * @return TokenResource
+     */
     public function refresh()
     {
         return TokenResource::make($this->service->refresh());
     }
 
+    /**
+     * Get the authenticated user.
+     *
+     * @return \Src\Users\Http\Resources\UserResource
+     */
     public function me()
     {
         return UserResource::make($this->service->me());
