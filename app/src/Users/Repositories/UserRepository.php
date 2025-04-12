@@ -26,7 +26,7 @@ class UserRepository implements UserRepositoryInterface
      */
     public function getUserById(string $id)
     {
-        return $this->resource->find($id);
+        return $this->resource->findOrFail($id);
     }
 
     /**
