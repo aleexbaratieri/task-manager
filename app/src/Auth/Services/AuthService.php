@@ -5,8 +5,8 @@ namespace Src\Auth\Services;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\UnauthorizedException;
 use Src\Users\Services\UserServiceInterface;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -22,14 +22,14 @@ class AuthService implements AuthServiceInterface
     /**
      * Attempt to authenticate a user and return a JWT token.
      *
-     * @throws UnauthorizedException
+     * @throws UnauthorizedHttpException
      */
     public function login(array $credentials): array
     {
         try {
 
             if (! $token = JWTAuth::attempt($credentials)) {
-                throw new UnauthorizedException('Invalid credentials');
+                throw new UnauthorizedHttpException('Invalid credentials');
             }
 
             return [

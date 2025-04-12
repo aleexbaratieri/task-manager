@@ -11,7 +11,7 @@ interface AuthServiceInterface
     /**
      * Attempt to authenticate a user and return a JWT token.
      *
-     * @throws UnauthorizedException
+     * @throws UnauthorizedHttpException
      */
     public function login(array $credentials): array;
 
