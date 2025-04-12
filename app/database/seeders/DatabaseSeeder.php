@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use Database\Factories\BuildingFactory;
-use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
+use Src\Buildings\Factories\BuildingFactory;
+use Src\Users\Factories\UserFactory;
 
 class DatabaseSeeder extends Seeder
 {

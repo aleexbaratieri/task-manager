@@ -1,16 +1,16 @@
 <?php
 
-namespace Database\Factories;
+namespace Src\Comments\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Src\Buildings\Models\Building;
+use Src\Comments\Models\Comment;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class BuildingFactory extends Factory
+class CommentFactory extends Factory
 {
-    protected $model = Building::class;
+    protected $model = Comment::class;
 
     /**
      * Define the model's default state.
@@ -20,9 +20,7 @@ class BuildingFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->company(),
-            'description' => fake()->catchPhrase(),
-            'address' => fake()->address(),
+            'comment' => $this->faker->text(),
         ];
     }
 }

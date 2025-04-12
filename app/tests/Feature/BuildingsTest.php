@@ -12,7 +12,7 @@ class BuildingsTest extends TestCase
 
     protected string $token;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->seed();
@@ -35,7 +35,7 @@ class BuildingsTest extends TestCase
                 'address',
                 'created_at',
                 'updated_at',
-            ]
+            ],
         ]);
 
         $response->assertJsonCount(10);

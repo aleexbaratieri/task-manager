@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -13,7 +12,7 @@ class AuthTest extends TestCase
 
     protected string $token;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->seed();
@@ -36,7 +35,7 @@ class AuthTest extends TestCase
                 'id',
                 'name',
                 'email',
-            ]
+            ],
         ]);
 
         $response->assertStatus(200);
@@ -85,7 +84,7 @@ class AuthTest extends TestCase
                 'id',
                 'name',
                 'email',
-            ]
+            ],
         ]);
 
         $response->assertStatus(200);

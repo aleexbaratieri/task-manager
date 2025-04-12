@@ -39,6 +39,9 @@ class LoadRelations implements LoadRelationsInterface
         return $relations;
     }
 
+    /**
+     * Tests if the given relation is requested
+     */
     protected static function testRelation(string $relation): bool
     {
         if (request()->has($relation) && true === filter_var(request()->{$relation}, FILTER_VALIDATE_BOOLEAN)) {

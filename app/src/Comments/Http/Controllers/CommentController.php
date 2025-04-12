@@ -4,6 +4,7 @@ namespace Src\Comments\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Src\Comments\Http\Requests\StoreCommentRequest;
 use Src\Comments\Http\Resources\CommentResource;
 use Src\Comments\Services\CommentServiceInterface;
 
@@ -52,7 +53,7 @@ class CommentController extends Controller
      * @param  Request                                      $request    The request object containing the data for creating the comment.
      * @return \Src\Comments\Http\Resources\CommentResource
      */
-    public function store(string $buildingId, string $taskId, Request $request)
+    public function store(string $buildingId, string $taskId, StoreCommentRequest $request)
     {
         return CommentResource::make($this->service->creteCommentOnTask($buildingId, $taskId, $request->validated()));
     }

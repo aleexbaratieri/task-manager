@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Src\Users\Models\User;
+use Src\Users\Factories\UserFactory;
 use Tests\TestCase;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -13,7 +13,7 @@ class UsersTest extends TestCase
 
     protected string $token;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->seed();
@@ -33,7 +33,7 @@ class UsersTest extends TestCase
                 'id',
                 'name',
                 'email',
-            ]
+            ],
         ]);
 
         $response->assertJsonCount(1);
@@ -43,7 +43,7 @@ class UsersTest extends TestCase
 
     public function test_the_user_can_be_retrieved_by_id(): void
     {
-        $user = User::first();
+        $user = UserFactory::new()->create();
 
         $response = $this->withToken($this->token)->get("/api/users/{$user->id}");
 
