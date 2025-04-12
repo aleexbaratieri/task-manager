@@ -2,18 +2,25 @@
 
 namespace Src\Tasks\Repositories;
 
+use Carbon\Carbon;
 use Src\Tasks\Constants\TaskStatus;
 use Src\Tasks\Models\Task;
 
 interface TaskRepositoryInterface
 {
+
     /**
      * Retrieve all tasks associated with a given building.
-     *
+     * 
      * @param  string                                                           $buildingId The building ID.
+     * @param  ?string                                                          $assignedTo The assigned to user ID.
+     * @param  ?string                                                          $status The task status.
+     * @param  ?Carbon                                                          $created_start The created start date.
+     * @param  ?Carbon                                                          $created_end The created end date.
+     * 
      * @return \Illuminate\Database\Eloquent\Collection<\Src\Tasks\Models\Task>
-     */
-    public function getTasksByBuilding(string $buildingId);
+     */ 
+    public function getTasksByBuilding(string $buildingId, ?string $assignedTo, ?string $status, ?Carbon $created_start, ?Carbon $created_end);
 
     /**
      * Retrieve a specific task by building ID and task ID.

@@ -10,7 +10,7 @@ interface TaskServiceInterface
      * @param  string                                                           $buildingId The building ID.
      * @return \Illuminate\Database\Eloquent\Collection<\Src\Tasks\Models\Task>
      */
-    public function getTasksFromBuilding(string $buildingId);
+    public function getTasksFromBuilding(string $buildingId, array $filters = []);
 
     /**
      * Retrieve a specific task associated with a given building.

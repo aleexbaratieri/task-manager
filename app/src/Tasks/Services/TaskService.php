@@ -2,8 +2,10 @@
 
 namespace Src\Tasks\Services;
 
+use Carbon\Carbon;
 use Src\Tasks\Constants\TaskStatus;
 use Src\Tasks\Filters\LoadRelations;
+use Src\Tasks\Filters\QueryParamsFilters;
 use Src\Tasks\Repositories\TaskRepositoryInterface;
 use Src\Tasks\Traits\StatusChangeVerification;
 
@@ -29,9 +31,14 @@ class TaskService implements TaskServiceInterface
      * @param  string                                                           $buildingId The building ID.
      * @return \Illuminate\Database\Eloquent\Collection<\Src\Tasks\Models\Task>
      */
-    public function getTasksFromBuilding(string $buildingId)
+    public function getTasksFromBuilding(string $buildingId, array $filters = [])
     {
-        return $this->repo->getTasksByBuilding($buildingId);
+        $assignedTo = QueryParamsFilters::getFilterValue($filters, 'assigned_to');
+        $status = QueryParamsFilters::getFilterValue($filters, 'status');
+        $created_start = QueryParamsFilters::getFilterValue($filters, 'created_start');
+        $created_end = QueryParamsFilters::getFilterValue($filters, 'created_end');
+
+        return $this->repo->getTasksByBuilding($buildingId, $assignedTo, $status, $created_start, $created_end);
     }
 
     /**

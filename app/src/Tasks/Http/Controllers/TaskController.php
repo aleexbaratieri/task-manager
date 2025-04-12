@@ -3,6 +3,7 @@
 namespace Src\Tasks\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Src\Tasks\Http\Requests\FilterRequest;
 use Src\Tasks\Http\Requests\StoreTaskRequest;
 use Src\Tasks\Http\Requests\UpdateTaskRequest;
 use Src\Tasks\Http\Resources\TaskResource;
@@ -23,9 +24,9 @@ class TaskController extends Controller
      * @param  string                                        $buildingId The ID of the building.
      * @return array<\Src\Tasks\Http\Resources\TaskResource>
      */
-    public function index(string $buildingId)
+    public function index(FilterRequest $filters, string $buildingId)
     {
-        return TaskResource::collection($this->service->getTasksFromBuilding($buildingId));
+        return TaskResource::collection($this->service->getTasksFromBuilding($buildingId, $filters->validated()));
     }
 
     /**

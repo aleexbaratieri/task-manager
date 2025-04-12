@@ -2,6 +2,7 @@
 
 namespace Src\Tasks\Repositories;
 
+use Carbon\Carbon;
 use Src\Tasks\Constants\TaskStatus;
 use Src\Tasks\Models\Task;
 
@@ -20,9 +21,24 @@ class TaskRepository implements TaskRepositoryInterface
      * @param  string                                                           $buildingId The building ID.
      * @return \Illuminate\Database\Eloquent\Collection<\Src\Tasks\Models\Task>
      */
-    public function getTasksByBuilding(string $buildingId)
+    public function getTasksByBuilding(string $buildingId, ?string $assignedTo, ?string $status, ?Carbon $created_start, ?Carbon $created_end)
     {
-        return $this->resource->where('building_id', $buildingId)->get();
+        $tasks = $this->resource->where('building_id', $buildingId);
+        
+        if ($assignedTo) {
+            $tasks->where('owner_id', $assignedTo);
+        }
+        
+        if ($status) {
+            $tasks->where('status', $status);
+        }
+        
+        if ($created_start && $created_end) {
+
+            $tasks->whereBetween('created_at', [$created_start, $created_end]);
+        }
+        
+        return $tasks->get();
     }
 
     /**
