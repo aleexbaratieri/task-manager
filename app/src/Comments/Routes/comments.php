@@ -14,7 +14,7 @@ use Src\Comments\Http\Controllers\CommentController;
 |
 */
 
-Route::prefix('buildings/{building}/tasks/{task}/comments')->group(function () {
+Route::middleware('auth:api')->prefix('buildings/{building}/tasks/{task}/comments')->group(function () {
     Route::get('/', [CommentController::class, 'index']);
     Route::get('/{comment}', [CommentController::class, 'show']);
     Route::post('/', [CommentController::class, 'store']);

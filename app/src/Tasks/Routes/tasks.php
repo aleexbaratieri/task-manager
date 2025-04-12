@@ -14,7 +14,7 @@ use Src\Tasks\Http\Controllers\TaskController;
 |
 */
 
-Route::prefix('buildings/{building}/tasks')->group(function () {
+Route::middleware('auth:api')->prefix('buildings/{building}/tasks')->group(function () {
     Route::get('/', [TaskController::class, 'index']);
     Route::get('/{task}', [TaskController::class, 'show']);
     Route::post('/', [TaskController::class, 'store']);
