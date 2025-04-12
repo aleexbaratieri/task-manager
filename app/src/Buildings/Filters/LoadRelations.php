@@ -26,7 +26,7 @@ class LoadRelations implements LoadRelationsInterface
             }
 
             if (self::testRelation('comments')) {
-                
+
                 $relations[] = 'tasks.comments';
 
                 if (self::testRelation('authors')) {

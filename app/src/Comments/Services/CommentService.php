@@ -15,11 +15,11 @@ class CommentService implements CommentServiceInterface
 
     /**
      * The Comment Service instance.
-     * 
+     *
      *
      * @param CommentRepositoryInterface $repo The CommentRepositoryInterface instance.
      */
-    public function __construct(private readonly CommentRepositoryInterface $repo) 
+    public function __construct(private readonly CommentRepositoryInterface $repo)
     {
         $this->relations = LoadRelations::handle();
     }

@@ -59,7 +59,6 @@ class Task extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-
     public function owner()
     {
         return $this->belongsTo(\App\Models\User::class);

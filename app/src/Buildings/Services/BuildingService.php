@@ -2,8 +2,8 @@
 
 namespace Src\Buildings\Services;
 
-use Src\Buildings\Repositories\BuildingRepositoryInterface;
 use Src\Buildings\Filters\LoadRelations;
+use Src\Buildings\Repositories\BuildingRepositoryInterface;
 
 class BuildingService implements BuildingServiceInterface
 {
