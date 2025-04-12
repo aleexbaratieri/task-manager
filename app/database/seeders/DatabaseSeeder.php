@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use Database\Factories\BuildingFactory;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \Src\Users\Models\User::factory(10)->create([
+        UserFactory::new()->create([
+            'name' => 'Super Admin',
+            'email' => 'admin@admin.com',
             'password' => bcrypt('secret'),
         ]);
 
