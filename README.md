@@ -113,7 +113,7 @@ Our clients operate in the real estate sector, managing multiple buildings withi
 - [x] Implement POST endpoint for creating a new task. 
 - [x] Implement POST endpoint for creating a new comment for a task. 
 - [x] Define the payload structure for task and comment creation, considering necessary relationships and information for possible filters. 
-- [ ] Implement filtering functionality, considering at least three filters such as date range of creation and assigned user, or task status and the building it belongs to.
+- [x] Implement filtering functionality, considering at least three filters such as date range of creation and assigned user, or task status and the building it belongs to.
 
 
 #### Expected Deliverables: 
