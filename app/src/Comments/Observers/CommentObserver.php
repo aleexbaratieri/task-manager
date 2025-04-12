@@ -13,6 +13,6 @@ class CommentObserver
      */
     public function creating(Comment $comment): void
     {
-        $comment->author_id = \App\Models\User::first()->id;
+        $comment->author_id = \Src\Users\Models\User::first()->id;
     }
 }

@@ -51,7 +51,7 @@ class Task extends Model
      */
     public function author()
     {
-        return $this->belongsTo(\App\Models\User::class);
+        return $this->belongsTo(\Src\Users\Models\User::class);
     }
 
     /**
@@ -61,6 +61,6 @@ class Task extends Model
      */
     public function owner()
     {
-        return $this->belongsTo(\App\Models\User::class);
+        return $this->belongsTo(\Src\Users\Models\User::class);
     }
 }
