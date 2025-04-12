@@ -6,11 +6,19 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\UnauthorizedException;
+use Src\Users\Services\UserServiceInterface;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthService implements AuthServiceInterface
 {
+    public function __construct(private readonly UserServiceInterface $userService) {}
+
+    public function register(array $data)
+    {
+        return $this->userService->createUser($data);
+    }
+
     /**
      * Attempt to authenticate a user and return a JWT token.
      *

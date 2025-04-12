@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\Authenticatable;
 
 interface AuthServiceInterface
 {
+    public function register(array $data);
+
     /**
      * Attempt to authenticate a user and return a JWT token.
      *
