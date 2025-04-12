@@ -44,5 +44,5 @@ jobs:
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: ":memory:"
-        run: vendor/bin/phpunit
+        run: php artisan test
         working-directory: app/
