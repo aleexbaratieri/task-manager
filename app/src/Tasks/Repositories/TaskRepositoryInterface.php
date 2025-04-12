@@ -2,6 +2,9 @@
 
 namespace Src\Tasks\Repositories;
 
+use Src\Tasks\Constants\TaskStatus;
+use Src\Tasks\Models\Task;
+
 interface TaskRepositoryInterface
 {
     /**
@@ -57,4 +60,13 @@ interface TaskRepositoryInterface
      * @return bool True if the task was deleted, false if not.
      */
     public function deleteTaskFromBuilding(string $buildingId, string $id);
+
+    /**
+     * Set the status of the task.
+     *
+     * @param  \Src\Tasks\Models\Task          $task   The task to set the status for.
+     * @param  \Src\Tasks\Constants\TaskStatus $status The status to set.
+     * @return \Src\Tasks\Models\Task          The task with the updated status.
+     */
+    public function setStatus(Task $task, TaskStatus $status);
 }

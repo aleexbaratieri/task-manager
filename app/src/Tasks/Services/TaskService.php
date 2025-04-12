@@ -2,18 +2,23 @@
 
 namespace Src\Tasks\Services;
 
+use Src\Tasks\Constants\TaskStatus;
 use Src\Tasks\Filters\LoadRelations;
 use Src\Tasks\Repositories\TaskRepositoryInterface;
+use Src\Tasks\Traits\StatusChangeVerification;
 
 class TaskService implements TaskServiceInterface
 {
+    use StatusChangeVerification;
+
     protected array $relations = [];
+
     /**
      * The task repository instance.
      *
      * @var \Src\Tasks\Repositories\TaskRepositoryInterface
      */
-    public function __construct(private readonly TaskRepositoryInterface $repo) 
+    public function __construct(private readonly TaskRepositoryInterface $repo)
     {
         $this->relations = LoadRelations::handle();
     }
@@ -89,5 +94,68 @@ class TaskService implements TaskServiceInterface
     public function deleteTaskFromBuilding(string $buildingId, string $taskId)
     {
         return $this->repo->deleteTaskFromBuilding($buildingId, $taskId);
+    }
+
+    /**
+     * Mark a specific task as in progress for a given building.
+     *
+     * @param string $buildingId The ID of the building.
+     * @param string $taskId     The ID of the task.
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException If the task is not found.
+     * @throws \DomainException                                     If the task is not open.
+     *
+     * @return \Src\Tasks\Models\Task The updated task.
+     */
+    public function startTask(string $buildingId, string $taskId)
+    {
+        $task = $this->repo->getTaskByBuilding($buildingId, $taskId);
+
+        $this->checkIfYouAreTheOwner($task);
+        $this->checkIfTaskStatusCanBeChanged($task->status, TaskStatus::OPEN);
+
+        return $this->repo->setStatus($task, TaskStatus::IN_PROGRESS);
+    }
+
+    /**
+     * Mark a specific task as completed for a given building.
+     *
+     * @param string $buildingId The ID of the building.
+     * @param string $taskId     The ID of the task.
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException If the task is not found.
+     * @throws \DomainException                                     If the task is not in progress.
+     *
+     * @return \Src\Tasks\Models\Task The updated task with completed status.
+     */
+    public function finishTask(string $buildingId, string $taskId)
+    {
+        $task = $this->repo->getTaskByBuilding($buildingId, $taskId);
+
+        $this->checkIfYouAreTheOwner($task);
+        $this->checkIfTaskStatusCanBeChanged($task->status, TaskStatus::IN_PROGRESS);
+
+        return $this->repo->setStatus($task, TaskStatus::COMPLETED);
+    }
+
+    /**
+     * Mark a specific task as rejected for a given building.
+     *
+     * @param string $buildingId The ID of the building.
+     * @param string $taskId     The ID of the task.
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException If the task is not found.
+     * @throws \DomainException                                     If the task is not open.
+     *
+     * @return \Src\Tasks\Models\Task The updated task with rejected status.
+     */
+    public function rejectTask(string $buildingId, string $taskId)
+    {
+        $task = $this->repo->getTaskByBuilding($buildingId, $taskId);
+
+        $this->checkIfYouAreTheOwner($task);
+        $this->checkIfTaskStatusCanBeChanged($task->status, TaskStatus::OPEN);
+
+        return $this->repo->setStatus($task, TaskStatus::REJECTED);
     }
 }

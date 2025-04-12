@@ -20,4 +20,8 @@ Route::prefix('buildings/{building}/tasks')->group(function () {
     Route::post('/', [TaskController::class, 'store']);
     Route::put('/{task}', [TaskController::class, 'update']);
     Route::delete('/{task}', [TaskController::class, 'destroy']);
+
+    Route::post('/{task}/start', [TaskController::class, 'startTask']);
+    Route::post('/{task}/finish', [TaskController::class, 'finishTask']);
+    Route::post('/{task}/reject', [TaskController::class, 'rejectTask']);
 });

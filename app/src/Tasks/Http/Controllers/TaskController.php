@@ -80,4 +80,25 @@ class TaskController extends Controller
             return response()->noContent();
         }
     }
+
+    public function startTask(string $buildingId, string $id)
+    {
+        $task = $this->service->startTask($buildingId, $id);
+
+        return TaskResource::make($task);
+    }
+
+    public function finishTask(string $buildingId, string $id)
+    {
+        $task = $this->service->finishTask($buildingId, $id);
+
+        return TaskResource::make($task);
+    }
+
+    public function rejectTask(string $buildingId, string $id)
+    {
+        $task = $this->service->rejectTask($buildingId, $id);
+
+        return TaskResource::make($task);
+    }
 }
