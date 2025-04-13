@@ -54,25 +54,25 @@ cd app
 5 . Start the containers:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 6. Install dependencies via Composer:
 
 ```bash
-docker-compose exec app composer install
+docker compose exec app composer install
 ```
 
 7 . Generate the application key:
 
 ```bash
-docker-compose exec app php artisan key:generate
+docker compose exec app php artisan key:generate
 ```
 
 8 . Run the database migrations:
 
 ```bash
-docker-compose exec app php artisan migrate
+docker compose exec app php artisan migrate
 ```
 
 ## 🐳 Services
@@ -85,19 +85,19 @@ docker-compose exec app php artisan migrate
 Access the app container:
 
 ```bash
-docker-compose exec app bash
+docker compose exec app bash
 ```
 
 Run tests:
 
 ```bash
-docker-compose exec app php artisan test
+docker compose exec app php artisan test
 ```
 
 Stop and remove containers:
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
 ---
